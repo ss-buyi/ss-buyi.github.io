@@ -4,34 +4,7 @@
   
     
     <entry>
-      <title>算法笔记入门篇 算法初步</title>
-      <link href="2020/12/22/Programme/PAT/Algorithm_of_notes/4-%E5%85%A5%E9%97%A8%E7%AF%87-%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5/"/>
-      <url>2020/12/22/Programme/PAT/Algorithm_of_notes/4-%E5%85%A5%E9%97%A8%E7%AF%87-%E7%AE%97%E6%B3%95%E5%88%9D%E6%AD%A5/</url>
-      
-        <content type="html"><![CDATA[<p>最近买了本算法笔记，开始刷刷看</p><h1 id="排序部分"><a href="#排序部分" class="headerlink" title="排序部分"></a>排序部分</h1><h2 id="B1015-A1062-德才论"><a href="#B1015-A1062-德才论" class="headerlink" title="B1015/A1062 德才论"></a>B1015/A1062 德才论</h2><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">问题描述</button></li><li class="tab"><button type="button" data-href="#test1-2">参考代码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><ol><li>问题描述<br> 宋代史学家司马光在《资治通鉴》中有一段著名的“德才论”：“是故才德全尽谓之圣人，才德兼亡谓之愚人，德胜才谓之君子，才胜德谓之小人。凡取人之术，苟不得圣人，君子而与之，与其得小人，不若得愚人。” 现给出一批考生的德才分数，请根据司马光的理论给出录取排名。</li><li>输入格式<br> 输入第一行给出 3 个正整数，分别为：N（≤10^5），即考生总数；L（≥60），为录取最低分数线，即德分和才分均不低于 L 的考生才有资格被考虑录取；H（&lt;100），为优先录取线——德分和才分均不低于此线的被定义为“才德全尽”，此类考生按德才总分从高到低排序；才分不到但德分到线的一类考生属于“德胜才”，也按总分排序，但排在第一类考生之后；德才分均低于 H，但是德分不低于才分的考生属于“才德兼亡”但尚有“德胜才”者，按总分排序，但排在第二类考生之后；其他达到最低线 L 的考生也按总分排序，但排在第三类考生之后。<br> 随后 N 行，每行给出一位考生的信息，包括：准考证号 德分 才分，其中准考证号为 8 位整数，德才分为区间 [0, 100] 内的整数。数字间以空格分隔。</li><li>输出格式<br> 输出第一行首先给出达到最低分数线的考生人数 M，随后 M 行，每行按照输入格式输出一位考生的信息，考生按输入中说明的规则从高到低排序。当某类考生中有多人总分相同时，按其德分降序排列；若德分也并列，则按准考证号的升序输出。</li><li>输入样例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">14 60 80</span><br><span class="line">10000001 64 90</span><br><span class="line">10000002 90 60</span><br><span class="line">10000011 85 80</span><br><span class="line">10000003 85 80</span><br><span class="line">10000004 80 85</span><br><span class="line">10000005 82 77</span><br><span class="line">10000006 83 76</span><br><span class="line">10000007 90 78</span><br><span class="line">10000008 75 79</span><br><span class="line">10000009 59 90</span><br><span class="line">10000010 88 45</span><br><span class="line">10000012 80 100</span><br><span class="line">10000013 90 99</span><br><span class="line">10000014 66 60</span><br></pre></td></tr></table></figure></li><li>输出样例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">12</span><br><span class="line">10000013 90 99</span><br><span class="line">10000012 80 100</span><br><span class="line">10000003 85 80</span><br><span class="line">10000011 85 80</span><br><span class="line">10000004 80 85</span><br><span class="line">10000007 90 78</span><br><span class="line">10000006 83 76</span><br><span class="line">10000005 82 77</span><br><span class="line">10000002 90 60</span><br><span class="line">10000014 66 60</span><br><span class="line">10000008 75 79</span><br><span class="line">10000001 64 90</span><br></pre></td></tr></table></figure></li></ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-2"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">问题描述</button></li><li class="tab"><button type="button" data-href="#test1-2">参考代码</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test1-2"><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
-      
-      
-      <categories>
-          
-          <category> Programma </category>
-          
-          <category> PAT </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Programma </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>信息安全工程师复习</title>
+      <title>信息安全工程师</title>
       <link href="2020/09/27/Class/InformationSecurityEngineer/"/>
       <url>2020/09/27/Class/InformationSecurityEngineer/</url>
       
@@ -166,7 +139,7 @@
     
     
     <entry>
-      <title>攻防世界 pwn 进阶区（）</title>
+      <title>攻防世界 pwn 进阶区</title>
       <link href="2020/07/25/CTF/xctf-jingjie-1/"/>
       <url>2020/07/25/CTF/xctf-jingjie-1/</url>
       
@@ -193,9 +166,9 @@
     
     
     <entry>
-      <title>buu re 前十道</title>
-      <link href="2020/05/18/CTF/buu-re-1-10/"/>
-      <url>2020/05/18/CTF/buu-re-1-10/</url>
+      <title>buu re</title>
+      <link href="2020/05/18/CTF/buu-re/"/>
+      <url>2020/05/18/CTF/buu-re/</url>
       
         <content type="html"><![CDATA[<p>最近搞了一下buu的题，记录一下</p><h2 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h2><p>首先查一下壳以及其他相关信息<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589757804.png"><br>可以看到是 64 位程序，没壳，那就可以直接用IDA打开了</p><p>IDA一键F5<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589757813.png"><br>真·easyre</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>拿到题目，继续查壳，看信息<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589759515.png"><br>64位程序，没壳<br>IDA打开后找主函数逻辑，然后…..点了半天没找到<br>我们直接<strong>shift+F12</strong>查看字符串<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589759557.png"></p><p>阔以发现这里有一个关键字符串</p><blockquote><p>this is the right flag!</p></blockquote><p>点进去，x查看交叉引用便可以找到主函数<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589759589.png"></p><p>阔以看到的是在这个字符串上面有个 <strong>strcpy</strong> 对比，其中一个是我们输入的字符串，而另一个不出意外就是flag了，点进去看看<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589759608.png"></p><p>加上 flag 前缀后我们直接提交，但很难受的就是可以发现flag是错误的。<br>我们继续去分析他的主函数<br>在上面我们可以看到他对 flag 做了与一个操作</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( j = <span class="number">0</span>; ; ++j )</span><br><span class="line">&#123;</span><br><span class="line">    v8 = j;</span><br><span class="line">    v2 = j_strlen(Str2);</span><br><span class="line">    <span class="keyword">if</span> ( v8 &gt; v2 )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( Str2[j] == <span class="number">111</span> )</span><br><span class="line">        Str2[j] = <span class="number">48</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注意他的第二个 if 判断，按 r 我们把 ascll 码变成字符，可以发现他是把字符串中的所有的 “o” 变成了 “0”<br>然后就不用我多说了吧，提交flag就行</p><h2 id="不一样的flag"><a href="#不一样的flag" class="headerlink" title="不一样的flag"></a>不一样的flag</h2><p>查壳，看信息<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589758255.png"><br>32位，没壳</p><p>IDA打开我们来分析逻辑<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589758359.png"></p><p>首先我们可以看到在下面他有提示让输入上下左右，其次在上面我们注意到有这么一行</p><blockquote><p>mov     ebx, offset __data_start__ ; “*11110100001010000101111#”</p></blockquote><p>注意最后的那个字符串基本是由 0 和 1 组成，并且首位是 * ，末尾是 #，那这个是绝对是个迷宫题没跑了<br>既然是迷宫题，我们就需要知道他是几行几列的迷宫题，这样我们才能去解<br>F5 分析逻辑，我们注意主函数最后的这一块<br><img src= "/img/loading.gif" data-lazy-src="/pic/buu_re_1_10/BurYiA1589758404.png"><br>可以看到迷宫的一层有5个字母，并且flag就是我们输入的内容<br>那显然迷宫就是这样的了</p><blockquote><p>*1111<br>01000<br>01010<br>00010<br>1111#</p></blockquote><p>flag 就不写了，扫一眼就出来了</p>]]></content>
       
@@ -220,7 +193,7 @@
     
     
     <entry>
-      <title>操作系统原理模拟测试题</title>
+      <title>操作系统原理</title>
       <link href="2020/05/07/Class/caozuoxitongyuanli-kecheng/"/>
       <url>2020/05/07/Class/caozuoxitongyuanli-kecheng/</url>
       
